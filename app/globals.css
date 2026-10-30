@@ -1,0 +1,271 @@
+@import "tailwindcss";
+
+:root {
+  --void: #05070d;
+  --midnight: #0b1220;
+  --ink: #121a2b;
+  --mist: #8b9bb4;
+  --moonlight: #e8eef8;
+  --crimson: #8f2d3a;
+  --crimson-bright: #c4454d;
+  --gold: #c4a35a;
+  --gold-soft: #e0c987;
+  --torii: #6b1f28;
+  --success: #3d7a5f;
+  --warning: #b8860b;
+  --danger: #a33b3b;
+  --border: rgba(196, 163, 90, 0.22);
+  --border-strong: rgba(196, 163, 90, 0.4);
+  --panel: rgba(18, 26, 43, 0.82);
+  --panel-solid: #121a2b;
+  --glow-gold: rgba(196, 163, 90, 0.15);
+  --glow-crimson: rgba(143, 45, 58, 0.2);
+  --background: var(--void);
+  --foreground: var(--moonlight);
+}
+
+/* Light Mode: Japanese Parchment & Washi Ink Aesthetic */
+html.light,
+[data-theme="light"] {
+  --void: #f5f7fb;
+  --midnight: #ffffff;
+  --ink: #eef2f8;
+  --mist: #54657e;
+  --moonlight: #162033;
+  --crimson: #9e2a38;
+  --crimson-bright: #c4454d;
+  --gold: #9e7a2b;
+  --gold-soft: #6e5218;
+  --torii: #7a222c;
+  --success: #26734d;
+  --warning: #a37200;
+  --danger: #b33939;
+  --border: rgba(158, 122, 43, 0.28);
+  --border-strong: rgba(158, 122, 43, 0.5);
+  --panel: rgba(255, 255, 255, 0.92);
+  --panel-solid: #ffffff;
+  --glow-gold: rgba(158, 122, 43, 0.12);
+  --glow-crimson: rgba(166, 43, 58, 0.12);
+  --background: var(--void);
+  --foreground: var(--moonlight);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-void: var(--void);
+  --color-midnight: var(--midnight);
+  --color-ink: var(--ink);
+  --color-mist: var(--mist);
+  --color-moonlight: var(--moonlight);
+  --color-crimson: var(--crimson);
+  --color-crimson-bright: var(--crimson-bright);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-torii: var(--torii);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-border: var(--border);
+  --color-panel: var(--panel-solid);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-mono);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: var(--void);
+  color: var(--moonlight);
+  font-family: var(--font-body), "Segoe UI", sans-serif;
+  background-image:
+    radial-gradient(ellipse 120% 80% at 50% -20%, rgba(143, 45, 58, 0.18), transparent 55%),
+    radial-gradient(ellipse 90% 60% at 100% 0%, rgba(196, 163, 90, 0.08), transparent 45%),
+    radial-gradient(ellipse 70% 50% at 0% 100%, rgba(11, 18, 32, 0.9), transparent 50%),
+    linear-gradient(180deg, #05070d 0%, #0b1220 45%, #05070d 100%);
+  background-attachment: fixed;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html.light body {
+  background: var(--void);
+  color: var(--moonlight);
+  background-image:
+    radial-gradient(ellipse 120% 80% at 50% -20%, rgba(158, 42, 56, 0.08), transparent 55%),
+    radial-gradient(ellipse 90% 60% at 100% 0%, rgba(158, 122, 43, 0.07), transparent 45%),
+    linear-gradient(180deg, #f8fafd 0%, #edf1f7 50%, #f5f7fb 100%);
+}
+
+::selection {
+  background: rgba(196, 163, 90, 0.35);
+  color: var(--moonlight);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.starfield {
+  position: relative;
+}
+
+.starfield::before {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    radial-gradient(1px 1px at 12% 18%, rgba(232, 238, 248, 0.7), transparent),
+    radial-gradient(1px 1px at 28% 42%, rgba(232, 238, 248, 0.45), transparent),
+    radial-gradient(1.5px 1.5px at 48% 12%, rgba(224, 201, 135, 0.55), transparent),
+    radial-gradient(1px 1px at 72% 28%, rgba(232, 238, 248, 0.5), transparent),
+    radial-gradient(1px 1px at 88% 55%, rgba(232, 238, 248, 0.35), transparent),
+    radial-gradient(1.5px 1.5px at 63% 72%, rgba(224, 201, 135, 0.4), transparent),
+    radial-gradient(1px 1px at 18% 78%, rgba(232, 238, 248, 0.4), transparent),
+    radial-gradient(1px 1px at 40% 88%, rgba(232, 238, 248, 0.3), transparent);
+  opacity: 0.85;
+  animation: drift 40s linear infinite;
+  transition: opacity 0.3s ease;
+}
+
+html.light .starfield::before {
+  opacity: 0.25;
+  filter: invert(1);
+}
+
+@keyframes drift {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.6s ease-out both;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2.4s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+.ink-panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+html.light .ink-panel {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.gold-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.55;
+}
+
+.leaflet-container {
+  background: #0b1220 !important;
+  font-family: var(--font-body), sans-serif;
+}
+
+/* ========================================================
+   SHINY HOVER ANIMATION FOR LEFT SIDEBAR NAVIGATION
+   ======================================================== */
+.nav-item-shiny {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Diagonal metallic starlight reflection beam */
+.nav-item-shiny::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -160%;
+  width: 120%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.05) 20%,
+    rgba(224, 201, 135, 0.5) 50%,
+    rgba(255, 255, 255, 0.3) 70%,
+    transparent 100%
+  );
+  transform: skewX(-25deg);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Trigger the shiny sweep across on hover */
+.nav-item-shiny:hover::before {
+  left: 200%;
+  transition: left 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.nav-item-shiny:hover {
+  border-color: var(--gold) !important;
+  background: linear-gradient(
+    90deg,
+    rgba(196, 163, 90, 0.18) 0%,
+    rgba(196, 163, 90, 0.06) 100%
+  ) !important;
+  box-shadow:
+    0 0 16px rgba(196, 163, 90, 0.3),
+    inset 0 0 12px rgba(196, 163, 90, 0.12) !important;
+  transform: translateX(4px);
+}
